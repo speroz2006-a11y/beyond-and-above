@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beyond &amp; Above — Corporate Aviation Training</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+  <script>
+    // Early theme init — runs before paint to prevent flash of wrong theme
+    (function() {
+      var stored = localStorage.getItem('b-a-theme');
+      var sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = stored || (sysDark ? 'dark' : 'light');
+      document.documentElement.dataset.theme = theme;
+    })();
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #090808;
+      --text:        #ede9e3;
+      --muted:       #656260;
+      --gold:        #9a7a4a;
+      --gold-hover:  #b3925e;
+      --border:      rgba(255,255,255,0.09);
+      --border-mid:  rgba(255,255,255,0.14);
+      --text-hi:     rgba(237,233,227,0.88);
+      --text-dim1:   rgba(237,233,227,0.68);
+      --text-dim2:   rgba(237,233,227,0.65);
+      --text-dim3:   rgba(237,233,227,0.60);
+      --text-dim4:   rgba(237,233,227,0.55);
+      --text-deco:   rgba(237,233,227,0.10);
+      --surface:     rgba(255,255,255,0.02);
+      --icon-dim:    rgba(255,255,255,0.05);
+      --icon-stroke: rgba(237,233,227,0.60);
+      --option-bg:   #0e0d0c;
+    }
+
+    /* ── Light theme: system preference (no-JS fallback) ────── */
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f4f1ec; --text: #1c1917; --muted: #8c8480;
+        --gold: #8a6a3a; --gold-hover: #a07a4a;
+        --border: rgba(0,0,0,0.10); --border-mid: rgba(0,0,0,0.16);
+        --text-hi: rgba(28,25,23,0.88); --text-dim1: rgba(28,25,23,0.68);
+        --text-dim2: rgba(28,25,23,0.65); --text-dim3: rgba(28,25,23,0.60);
+        --text-dim4: rgba(28,25,23,0.55); --text-deco: rgba(28,25,23,0.12);
+        --surface: rgba(0,0,0,0.02); --icon-dim: rgba(0,0,0,0.04);
+        --icon-stroke: rgba(28,25,23,0.55); --option-bg: #f4f1ec;
+      }
+      #nav.scrolled { background: rgba(244,241,236,0.92); }
+      .pill:hover { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.22); }
+      .scroll-line { background: linear-gradient(to bottom, transparent, rgba(28,25,23,0.16), transparent); }
+      #hero { --text: #ede9e3; }
+      #hero .hero-bottom { --text: #ede9e3; --text-dim1: rgba(237,233,227,0.68); --text-dim2: rgba(237,233,227,0.65); --muted: rgba(237,233,227,0.50); --border: rgba(255,255,255,0.09); }
+      .hero-bg::after { background: linear-gradient(to bottom, rgba(9,8,8,0.44) 0%, rgba(9,8,8,0.52) 38%, rgba(9,8,8,0.72) 65%, rgba(9,8,8,0.94) 88%); }
+      #career-section { --text: #ede9e3; }
+      #career-section .bg img { filter: brightness(0.62); }
+      #career-section .bg::after { background: linear-gradient(to bottom, rgba(244,241,236,0.88) 0%, rgba(244,241,236,0.0) 26%, rgba(9,8,8,0.0) 52%, rgba(9,8,8,0.85) 100%); }
+      .ticker-item { color: rgba(28,25,23,0.50); }
+      #sticky-bar { background: rgba(244,241,236,0.97); }
+      .nav-logo { filter: none; opacity: 0.85; }
+    }
+
+    /* ── Light theme: manual override ────────────────────────── */
+    html[data-theme="light"] {
+      --bg: #f4f1ec; --text: #1c1917; --muted: #8c8480;
+      --gold: #8a6a3a; --gold-hover: #a07a4a;
+      --border: rgba(0,0,0,0.10); --border-mid: rgba(0,0,0,0.16);
+      --text-hi: rgba(28,25,23,0.88); --text-dim1: rgba(28,25,23,0.68);
+      --text-dim2: rgba(28,25,23,0.65); --text-dim3: rgba(28,25,23,0.60);
+      --text-dim4: rgba(28,25,23,0.55); --text-deco: rgba(28,25,23,0.12);
+      --surface: rgba(0,0,0,0.02); --icon-dim: rgba(0,0,0,0.04);
+      --icon-stroke: rgba(28,25,23,0.55); --option-bg: #f4f1ec;
+    }
+    html[data-theme="light"] #nav.scrolled { background: rgba(244,241,236,0.92); }
+    html[data-theme="light"] .pill:hover { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.22); }
+    html[data-theme="light"] .scroll-line { background: linear-gradient(to bottom, transparent, rgba(28,25,23,0.16), transparent); }
+    html[data-theme="light"] #hero { --text: #ede9e3; }
+    html[data-theme="light"] #hero .hero-bottom { --text: #ede9e3; --text-dim1: rgba(237,233,227,0.68); --text-dim2: rgba(237,233,227,0.65); --muted: rgba(237,233,227,0.50); --border: rgba(255,255,255,0.09); }
+    html[data-theme="light"] .hero-bg::after { background: linear-gradient(to bottom, rgba(9,8,8,0.44) 0%, rgba(9,8,8,0.52) 38%, rgba(9,8,8,0.72) 65%, rgba(9,8,8,0.94) 88%); }
+    html[data-theme="light"] #career-section { --text: #ede9e3; }
+    html[data-theme="light"] #career-section .bg img { filter: brightness(0.62); }
+    html[data-theme="light"] #career-section .bg::after { background: linear-gradient(to bottom, rgba(244,241,236,0.88) 0%, rgba(244,241,236,0.0) 26%, rgba(9,8,8,0.0) 52%, rgba(9,8,8,0.85) 100%); }
+    html[data-theme="light"] .ticker-item { color: rgba(28,25,23,0.50); }
+    html[data-theme="light"] #sticky-bar { background: rgba(244,241,236,0.97); }
+    html[data-theme="light"] .nav-logo { filter: none; opacity: 0.85; }
+
+    /* ── Dark theme: manual override (beats system light) ─────── */
+    html[data-theme="dark"] {
+      --bg: #090808; --text: #ede9e3; --muted: #656260;
+      --gold: #9a7a4a; --gold-hover: #b3925e;
+      --border: rgba(255,255,255,0.09); --border-mid: rgba(255,255,255,0.14);
+      --text-hi: rgba(237,233,227,0.88); --text-dim1: rgba(237,233,227,0.68);
+      --text-dim2: rgba(237,233,227,0.65); --text-dim3: rgba(237,233,227,0.60);
+      --text-dim4: rgba(237,233,227,0.55); --text-deco: rgba(237,233,227,0.10);
+      --surface: rgba(255,255,255,0.02); --icon-dim: rgba(255,255,255,0.05);
+      --icon-stroke: rgba(237,233,227,0.60); --option-bg: #0e0d0c;
+    }
+    html[data-theme="dark"] #nav.scrolled { background: rgba(9,8,8,0.88); }
+    html[data-theme="dark"] .pill:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.3); }
+    html[data-theme="dark"] .scroll-line { background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.22), transparent); }
+    html[data-theme="dark"] #hero { --text: #ede9e3; }
+    html[data-theme="dark"] #hero .hero-bottom { --text: #ede9e3; }
+    html[data-theme="dark"] .hero-bg::after { background: linear-gradient(to bottom, rgba(9,8,8,0.22) 0%, rgba(9,8,8,0.38) 35%, rgba(9,8,8,0.88) 62%, rgba(9,8,8,0.97) 88%); }
+    html[data-theme="dark"] #career-section { --text: #ede9e3; }
+    html[data-theme="dark"] #career-section .bg img { filter: brightness(0.40); }
+    html[data-theme="dark"] #career-section .bg::after { background: linear-gradient(to top, rgba(9,8,8,0.90) 0%, transparent 55%); }
+    html[data-theme="dark"] .ticker-item { color: rgba(237,233,227,0.55); }
+    html[data-theme="dark"] #sticky-bar { background: rgba(9,8,8,0.95); }
+    html[data-theme="dark"] .nav-logo { filter: invert(1) hue-rotate(180deg); opacity: 0.88; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── Typography ─────────────────────────────────────── */
+    .f-display { font-family: 'Cormorant Garamond', serif; }
+
+    .hero-wordmark {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(38px, 6vw, 96px);
+      letter-spacing: 0.14em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .hero-sub {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 200;
+      font-size: clamp(9px, 1.05vw, 14px);
+      letter-spacing: 0.52em;
+      text-transform: uppercase;
+      margin-top: 10px;
+      padding-left: 0.52em;
+    }
+
+    .heading-xl {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(52px, 7.5vw, 124px);
+      line-height: 1.04;
+      letter-spacing: -0.01em;
+    }
+    .heading-xl em { font-style: italic; }
+
+    .heading-lg {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(38px, 4.5vw, 72px);
+      line-height: 1.1;
+      letter-spacing: 0.01em;
+    }
+    .heading-lg em { font-style: italic; }
+
+    .heading-md {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(28px, 3vw, 52px);
+      line-height: 1.2;
+    }
+    .heading-md em { font-style: italic; }
+
+    .label {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── Pill buttons ────────────────────────────────────── */
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 16px;
+      border: 1px solid var(--border-mid);
+      border-radius: 9999px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 10.5px;
+      font-weight: 400;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--text);
+      cursor: pointer;
+      background: transparent;
+      transition: background 0.22s ease, border-color 0.22s ease, transform 0.15s ease;
+      white-space: nowrap;
+    }
+    .pill:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.3); }
+    .pill:active { transform: scale(0.98); }
+
+    .pill-gold {
+      background: var(--gold);
+      border-color: transparent;
+      color: #f4f1ec;
+    }
+    .pill-gold:hover { background: var(--gold-hover); border-color: transparent; }
+
+    .pill-sm {
+      padding: 5px 13px;
+      font-size: 9.5px;
+    }
+
+    /* ── Nav ─────────────────────────────────────────────── */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 28px;
+      transition: background 0.35s ease, backdrop-filter 0.35s ease;
+    }
+    #nav.scrolled {
+      background: rgba(9,8,8,0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    /* Nav always uses light text over the hero photo before scrolling */
+    #nav:not(.scrolled) {
+      --text: #ede9e3;
+      --muted: rgba(237,233,227,0.5);
+      --border-mid: rgba(255,255,255,0.14);
+      --border: rgba(255,255,255,0.09);
+    }
+    .nav-left  { display: flex; align-items: center; gap: 18px; }
+    .nav-right { display: flex; align-items: center; gap: 20px; }
+
+    .nav-social { display: flex; align-items: center; gap: 14px; opacity: 0.5; }
+    .nav-social a { color: var(--text); display: flex; transition: opacity 0.2s ease; }
+    .nav-social a:hover { opacity: 1; }
+
+    #menu-btn {
+      background: none; border: none; color: var(--text);
+      font-family: 'Outfit', sans-serif; font-size: 10.5px;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      cursor: pointer; display: flex; align-items: center; gap: 7px;
+      transition: opacity 0.2s ease;
+    }
+    #menu-btn:hover { opacity: 0.7; }
+
+    /* ── Mobile overlay menu ─────────────────────────────── */
+    #overlay-menu {
+      position: fixed; inset: 0; z-index: 300;
+      background: var(--bg);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    #overlay-menu.open { opacity: 1; pointer-events: all; }
+
+    #overlay-menu nav { display: flex; flex-direction: column; align-items: center; gap: 28px; }
+    #overlay-menu nav a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      color: var(--text);
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+    #overlay-menu nav a:hover { opacity: 0.5; }
+
+    #menu-close {
+      position: absolute; top: 20px; right: 28px;
+      background: none; border: none; color: var(--text);
+      font-family: 'Outfit', sans-serif; font-size: 10.5px;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      cursor: pointer; display: flex; align-items: center; gap: 6px;
+    }
+
+    /* ── Hero ────────────────────────────────────────────── */
+    #hero {
+      position: relative;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+    }
+    .hero-bg img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: 50% 38%;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(9,8,8,0.22) 0%,
+        rgba(9,8,8,0.38) 35%,
+        rgba(9,8,8,0.88) 62%,
+        rgba(9,8,8,0.97) 88%
+      );
+    }
+
+    .hero-center {
+      flex: 1;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      position: relative; z-index: 5;
+      padding-top: 80px;
+    }
+
+    .hero-bottom {
+      position: relative; z-index: 5;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 28px;
+      padding: 0 28px 36px;
+      align-items: end;
+      background: linear-gradient(to top, rgba(9,8,8,0.72) 0%, transparent 100%);
+    }
+
+    .hero-bottom-divider {
+      border-left: 1px solid var(--border);
+      padding-left: 24px;
+    }
+
+    .scroll-line {
+      position: absolute;
+      right: 28px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1px;
+      height: 80px;
+      background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.22), transparent);
+      z-index: 5;
+    }
+
+    /* ── Sections ────────────────────────────────────────── */
+    .section-pad { padding: 100px 8vw; }
+    .divider { width: 100%; height: 1px; background: var(--border); }
+
+    /* ── Full-bleed section ──────────────────────────────── */
+    #career-section {
+      position: relative;
+      min-height: 100dvh;
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
+    }
+    #career-section .bg {
+      position: absolute; inset: 0; z-index: 0;
+    }
+    #career-section .bg img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: 50% 55%;
+      filter: brightness(0.40);
+    }
+    #career-section .bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(9,8,8,0.90) 0%, transparent 55%);
+    }
+    #career-section .content {
+      position: relative; z-index: 5;
+      padding: 0 8vw 80px;
+      color: var(--text);
+    }
+
+    /* ── Gallery marquee ─────────────────────────────────── */
+    @keyframes scroll-right {
+      0%   { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+    .gallery-track {
+      display: flex;
+      width: max-content;
+      gap: 10px;
+      align-items: stretch;
+      animation: scroll-right 50s linear infinite;
+    }
+    .gallery-track:hover { animation-play-state: paused; }
+
+    /* ── Curriculum ticker ───────────────────────────────── */
+    @keyframes ticker {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      align-items: center;
+      animation: ticker 42s linear infinite;
+    }
+    .ticker-track:hover { animation-play-state: paused; }
+
+    .ticker-item {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 10px;
+      padding: 0 30px;
+      font-size: 11.5px;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(237,233,227,0.55);
+      white-space: nowrap;
+    }
+    .ticker-sep { color: var(--border); opacity: 0.6; font-size: 12px; }
+
+    /* ── Priority grid ───────────────────────────────────── */
+    .priority-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .priority-cell {
+      padding: 40px 0;
+    }
+    .priority-cell:nth-child(odd)  { padding-right: 52px; border-right: 1px solid var(--border); }
+    .priority-cell:nth-child(even) { padding-left: 52px; }
+    .priority-cell:nth-child(1), .priority-cell:nth-child(2) { border-bottom: 1px solid var(--border); }
+
+    /* ── Course rows ─────────────────────────────────────── */
+    .course-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 24px;
+      padding: 28px 0;
+      border-top: 1px solid var(--border);
+    }
+    .course-row:last-of-type { border-bottom: 1px solid var(--border); }
+
+    /* ── Testimonial quotes ──────────────────────────────── */
+    .quote-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 52px;
+    }
+
+    /* ── Sticky bar ──────────────────────────────────────── */
+    #sticky-bar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 150;
+      background: rgba(9,8,8,0.95);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-top: 1px solid var(--border-mid);
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      transform: translateY(100%);
+      transition: transform 0.44s cubic-bezier(0.16,1,0.3,1);
+    }
+    #sticky-bar.visible { transform: translateY(0); }
+
+    /* ── Footer ──────────────────────────────────────────── */
+    footer {
+      padding: 22px 28px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    /* ── Logo ────────────────────────────────────────────── */
+    .nav-logo {
+      height: 40px;
+      width: auto;
+      display: block;
+      filter: invert(1) hue-rotate(180deg);
+      opacity: 0.88;
+      transition: opacity 0.2s ease;
+    }
+    .nav-logo:hover { opacity: 1; }
+    @media (prefers-color-scheme: light) {
+      .nav-logo { filter: none; opacity: 0.85; }
+    }
+
+    /* ── Reduced motion ──────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      .gallery-track, .ticker-track { animation: none; }
+      #sticky-bar { transition: none; }
+    }
+
+    /* ── Mobile ──────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .hero-bottom { grid-template-columns: 1fr; gap: 24px; padding: 0 20px 28px; }
+      .hero-bottom-divider { border-left: none; border-top: 1px solid var(--border); padding-left: 0; padding-top: 20px; }
+      .section-pad { padding: 70px 5vw; }
+      .priority-grid { grid-template-columns: 1fr; }
+      .priority-cell:nth-child(odd)  { padding-right: 0; border-right: none; }
+      .priority-cell:nth-child(even) { padding-left: 0; }
+      .priority-cell { border-bottom: 1px solid var(--border); }
+      .priority-cell:last-child { border-bottom: none; }
+      #career-section .content { padding: 0 5vw 60px; }
+      .program-grid { grid-template-columns: 1fr !important; }
+      .quote-grid { grid-template-columns: 1fr !important; }
+      .course-row { grid-template-columns: 1fr; }
+      #sticky-bar { padding: 12px 20px; }
+      #sticky-bar .sticky-label { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       STICKY BOTTOM BAR
+  ═══════════════════════════════════════════════════════════ -->
+  <div id="sticky-bar" role="complementary" aria-label="Register for training">
+    <div style="display:flex; align-items:center; gap:18px; min-width:0;">
+      <div style="width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;opacity:0.9;"></div>
+      <p class="sticky-label" style="font-size:11.5px; color:var(--text-dim2); letter-spacing:0.04em; white-space:nowrap;">
+        Limited class sizes &mdash; next session forming now
+      </p>
+    </div>
+    <div style="display:flex; align-items:center; gap:12px; flex-shrink:0;">
+      <a href="https://beyondandabove.net" target="_blank" rel="noopener" class="pill pill-gold" style="font-size:10px; padding:7px 18px;">
+        Register Now &#8594;
+      </a>
+      <button id="sticky-dismiss" aria-label="Dismiss" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;line-height:1;padding:2px 4px;transition:color 0.2s ease;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">&#215;</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════════════════════════ -->
+  <header id="nav">
+    <div class="nav-left">
+      <a href="https://beyondandabove.net" target="_blank" rel="noopener" class="pill">Register &#8594;</a>
+      <div class="nav-social">
+        <a href="tel:+19546095600" aria-label="Call us">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.1a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.06 6.06l1.27-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+        </a>
+        <a href="mailto:marylou@beyondandabove.net" aria-label="Email">
+          <svg width="16" height="12" viewBox="0 0 24 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="1" width="20" height="16" rx="2"/>
+            <polyline points="2,3 12,11 22,3"/>
+          </svg>
+        </a>
+        <button id="theme-toggle" aria-label="Toggle light/dark mode" style="background:none;border:none;color:var(--text);cursor:pointer;display:flex;align-items:center;padding:0;transition:opacity 0.2s ease;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity=''">
+          <!-- Sun: shown in dark mode -->
+          <svg id="theme-icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <!-- Moon: shown in light mode -->
+          <svg id="theme-icon-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <a href="/" aria-label="Beyond & Above Corporate Aviation Training" style="text-decoration:none;">
+      <img src="images/logo.png" alt="Beyond & Above" class="nav-logo">
+    </a>
+
+    <div class="nav-right">
+      <button id="menu-btn" aria-label="Open menu">
+        MENU
+        <svg width="16" height="11" viewBox="0 0 16 11" fill="none">
+          <line x1="0" y1="0.5"  x2="16" y2="0.5"  stroke="currentColor" stroke-width="1"/>
+          <line x1="0" y1="5.5"  x2="16" y2="5.5"  stroke="currentColor" stroke-width="1"/>
+          <line x1="0" y1="10.5" x2="16" y2="10.5" stroke="currentColor" stroke-width="1"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       OVERLAY MENU
+  ═══════════════════════════════════════════════════════════ -->
+  <div id="overlay-menu">
+    <button id="menu-close" aria-label="Close menu">
+      CLOSE
+      <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+        <line x1="1" y1="1" x2="10" y2="10" stroke="currentColor" stroke-width="1"/>
+        <line x1="10" y1="1" x2="1"  y2="10" stroke="currentColor" stroke-width="1"/>
+      </svg>
+    </button>
+    <nav>
+      <a href="/">Home</a>
+      <a href="#program">Program</a>
+      <a href="#courses">Courses</a>
+      <a href="#testimonials">Graduates</a>
+      <a href="#contact">Contact</a>
+      <a href="https://beyondandabove.net" target="_blank" rel="noopener" class="pill pill-gold" style="font-size:14px; padding:12px 30px; margin-top:16px;">Register for a Class &#8594;</a>
+    </nav>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════════════════════ -->
+  <section id="hero">
+    <div class="hero-bg">
+      <img
+        src="images/hero.jpg"
+        alt="Beyond & Above — Corporate Aviation Training, Fort Lauderdale"
+        loading="eager"
+        fetchpriority="high"
+      >
+    </div>
+
+    <div class="scroll-line"></div>
+
+    <div class="hero-center">
+      <h1 class="hero-wordmark" style="text-align:center; color:var(--text);">BEYOND &amp; ABOVE</h1>
+      <p class="hero-sub" style="text-align:center; color:rgba(237,233,227,0.55);">Corporate Aviation Training</p>
+      <p style="font-family:'Outfit',sans-serif; font-weight:300; font-size:clamp(12px,1.2vw,15px); color:rgba(237,233,227,0.52); margin-top:22px; letter-spacing:0.03em; max-width:46ch; text-align:center; line-height:1.65;">
+        No aviation experience required. Six days of hands-on training at Fort Lauderdale Executive Airport.
+      </p>
+      <a href="https://beyondandabove.net" target="_blank" rel="noopener" class="pill pill-gold" style="margin-top:30px; font-size:10px; padding:8px 20px;">
+        Register for the Next Class &#8594;
+      </a>
+    </div>
+
+    <div class="hero-bottom">
+
+      <div>
+        <a href="#testimonials" style="text-decoration:none; color:var(--text); display:flex; gap:14px; align-items:flex-start;">
+          <div style="width:76px; height:76px; flex-shrink:0; border-radius:4px; overflow:hidden;">
+            <img src="images/gal5.jpg" alt="" style="width:100%;height:100%;object-fit:cover;filter:saturate(0.6);">
+          </div>
+          <div style="flex:1; min-width:0;">
+            <p class="label" style="margin-bottom:6px;">Graduate Outcome</p>
+            <p style="font-size:12.5px; line-height:1.45; margin-bottom:10px; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;">
+              Hired within one month of completing the program
+            </p>
+            <span class="pill pill-sm">Read graduate stories &#8594;</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="hero-bottom-divider">
+        <p style="font-size:12.5px; line-height:1.7; color:var(--text-dim1); margin-bottom:16px; max-width:36ch;">
+          A 6-day curriculum built around real aircraft, real service standards, and real career outcomes. Training takes place at Fort Lauderdale Executive Airport alongside actual private jets.
+        </p>
+        <a href="#program" class="pill pill-sm">About the program &#8594;</a>
+      </div>
+
+      <div class="hero-bottom-divider">
+        <p style="font-size:12.5px; line-height:1.7; color:var(--text-dim1); margin-bottom:16px; max-width:36ch;">
+          Covers FAA Parts 91, 125 &amp; 135. Voted the #1 corporate flight attendant training academy for over 20 years. 4.9 stars across 46 verified Google reviews.
+        </p>
+        <a href="https://beyondandabove.net" target="_blank" rel="noopener" class="pill pill-sm pill-gold">Register now &#8594;</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       THE PROGRAM
+  ═══════════════════════════════════════════════════════════ -->
+  <section id="program" class="section-pad">
+    <div class="program-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:start;">
+
+      <div>
+        <p class="label" style="margin-bottom:18px;">The Training Program</p>
+        <h2 class="heading-lg" style="margin-bottom:32px; max-width:18ch;">
+          Six days that can
+          <em>change</em> the direction of
+          <em>your career</em>
+        </h2>
+
+        <div style="display:flex; flex-direction:column; gap:18px; font-size:13.5px; line-height:1.78; color:var(--text-dim2); max-width:52ch;">
+          <p>
+            Beyond &amp; Above has trained corporate flight attendants and pilots for over 24 years at Fort Lauderdale Executive Airport — one of the most active private aviation hubs in the United States. Every course includes hands-on time aboard real luxury jets at Banyan Air Service's FBO.
+          </p>
+          <p>
+            The initial 6-day program covers emergency safety procedures, white glove service delivery, culinary arts and galley management, cabin etiquette, passenger relations, and resume preparation. No prior experience is required. Students leave with the skills, certifications, and confidence to begin working immediately.
+          </p>
+          <p>
+            Graduates routinely receive job offers within weeks. Corporate flight attendants on FAA Part 135 operators typically earn $600 to $900 per day. The investment in training pays for itself quickly — and the lifestyle it opens is unlike anything else in aviation.
+          </p>
+          <p style="color:var(--text); font-weight:400;">Voted the #1 training academy for corporate flight attendants for over 20 years.</p>
+        </div>
+
+        <div style="margin-top:36px; display:flex; gap:12px; flex-wrap:wrap;">
+          <a href="https://beyondandabove.net" target="_blank" rel="noopener" class="pill pill-gold">View class schedule &#8594;</a>
+          <a href="tel:+19546095600" class="pill">(954) 609-5600</a>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:20px;">
+        <div style="border-radius:8px; overflow:hidden; aspect-ratio:5/6;">
+          <img
+            src="images/program.jpg"
+            alt="Beyond & Above training program"
+            style="width:100%;height:100%;object-fit:cover;filter:brightness(0.82) saturate(0.60);"
+            loading="lazy"
+          >
+        </div>
+
+        <div style="display:flex; align-items:center; gap:14px; padding:16px 20px; border:1px solid var(--border); border-radius:7px; background:var(--surface);">
+          <div style="width:38px;height:38px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="white" stroke="none">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+          </div>
+          <div style="flex:1; min-width:0;">
+            <p style="font-size:10px; font-weight:400; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:3px;">4.9 Stars &mdash; 46 Google Reviews</p>
+            <p style="font-size:11.5px; color:var(--muted); line-height:1.4;">Fort Lauderdale Executive Airport &mdash; FAA Parts 91, 125 &amp; 135</p>
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:14px; padding:16px 20px; border:1px solid var(--border); border-radius:7px; background:var(--surface);">
+          <div style="width:38px;height:38px;border-radius:50%;background:var(--icon-dim);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--icon-stroke)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div style="flex:1; min-width:0;">
+            <p style="font-size:10px; font-weight:400; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:3px;">2011 S Perimeter Rd, Suite D &amp; E</p>
+            <p style="font-size:11.5px; color:var(--muted); line-height:1.4;">Fort Lauderdale, FL 33309 &mdash; Near FXE Airport</p>
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:14px; padding:16px 20px; border:1px solid var(--border); border-radius:7px; background:var(--surface);">
+          <div style="width:38px;height:38px;border-radius:50%;background:var(--icon-dim);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--icon-stroke)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+          </div>
+          <div style="flex:1; min-width:0;">
+            <p style="font-size:10px; font-weight:400; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:3px;">Open to all backgrounds</p>
+            <p style="font-size:11.5px; color:var(--muted); line-height:1.4;">No prior aviation experience required to enroll</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       COURSES & PRICING
+  ═══════════════════════════════════════════════════════════ -->
+  <section id="courses" class="section-pad" style="padding-top:40px;">
+    <div class="divider" style="margin-bottom:56px;"></div>
+
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:52px; flex-wrap:wrap; gap:16px;">
+      <div>
+        <p class="label" style="margin-bottom:14px;">Training Programs</p>
+        <h2 class="heading-lg">Choose the program <em>that fits</em> where you are now</h2>
+      </div>
+      <a href="https://beyondandabove.net" target="_blank" rel="noopener" class="pill pill-sm pill-gold">View class schedule &#8594;</a>
+    </div>
+
+    <!-- Course rows -->
+    <div>
+
+      <div class="course-row">
+        <div>
+          <p class="label" style="margin-bottom:10px;">Initial Training &mdash; 6 Days</p>
+          <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(20px,2vw,28px); font-weight:300; line-height:1.2; margin-bottom:10px;">Corporate Flight Attendant Initial Training</p>
+          <p style="font-size:12.5px; line-height:1.65; color:var(--text-dim4); max-width:52ch;">Full FAA-compliant certification covering emergency procedures, white glove service, culinary arts, cabin etiquette, and career placement. No experience required.</p>
+        </div>
+        <div style="text-align:right; flex-shrink:0;">
+          <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(22px,2.2vw,32px); font-weight:300; margin-bottom:12px; white-space:nowrap;">$3,500&ndash;$3,800</p>
+          <a href="https://beyondandabove.net" target="_blank" rel="noopener" class="pill pill-sm pill-gold">Register &#8594;</a>
+        </div>
+      </div>
+
+      <div class="course-row">
+        <div>
+          <p class="label" style="margin-bottom:10px;">Transitional Training &mdash; 3 Days</p>
+          <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(20px,2vw,28px); font-weight:300; line-height:1.2; margin-bottom:10px;">Corporate Training for Commercial Flight Attendants</p>
+          <p style="font-size:12.5px; line-height:1.65; color:var(--text-dim4); max-width:52ch;">For current FAA Part 121 licensed commercial flight attendants transitioning to corporate and private aviation operations.</p>
+        </div>
+        <div style="text-align:right; flex-shrink:0;">
+          <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(22px,2.2vw,32px); font-weight:300; margin-bottom:12px; white-space:nowrap;">$1,750&ndash;$1,900</p>
+          <a href="https://beyondandabove.net" target="_blank" rel="noopener" class="pill pill-sm pill-gold">Register &#8594;</a>
+        </div>
+      </div>
+
+      <div class="course-row">
+        <div>
+          <p class="label" style="margin-bottom:10px;">Recurrent Training &mdash; 3 Days (In-Class)</p>
+          <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(20px,2vw,28px); font-weight:300; line-height:1.2; margin-bottom:10px;">Recurrent Corporate Flight Attendant Emergency Training</p>
+          <p style="font-size:12.5px; line-height:1.65; color:var(--text-dim4); max-width:52ch;">For working corporate flight attendants maintaining FAA Parts 91, 125, and 135 currency. In-person at Fort Lauderdale Executive Airport.</p>
+        </div>
+        <div style="text-align:right; flex-shrink:0;">
+          <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(22px,2.2vw,32px); font-weight:300; margin-bottom:12px; white-space:nowrap;">$1,750&ndash;$1,900</p>
+          <a href="https://beyondandabove.net" target="_blank" rel="noopener" class="pill pill-sm pill-gold">Register &#8594;</a>
+        </div>
+      </div>
+
+      <div class="course-row">
+        <div>
+          <p class="label" style="margin-bottom:10px;">Pilot Emergency Training &mdash; 1 Day</p>
+          <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(20px,2vw,28px); font-weight:300; line-height:1.2; margin-bottom:10px;">Emergency Training for Pilots</p>
+          <p style="font-size:12.5px; line-height:1.65; color:var(--text-dim4); max-width:52ch;">One-day emergency certification for pilots operating under FAA Parts 91, 125, and 135. Covers cabin emergency procedures, evacuation, and first aid protocols.</p>
+        </div>
+        <div style="text-align:right; flex-shrink:0;">
+          <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(22px,2.2vw,32px); font-weight:300; margin-bottom:12px; white-space:nowrap;">$800&ndash;$950</p>
+          <a href="https://beyondandabove.net" target="_blank" rel="noopener" class="pill pill-sm pill-gold">Register &#8594;</a>
+        </div>
+      </div>
+
+      <div class="course-row">
+        <div>
+          <p class="label" style="margin-bottom:10px;">Online &mdash; Self-Paced</p>
+          <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(20px,2vw,28px); font-weight:300; line-height:1.2; margin-bottom:10px;">Online Recurrent Emergency Training</p>
+          <p style="font-size:12.5px; line-height:1.65; color:var(--text-dim4); max-width:52ch;">Complete your recurrent emergency training entirely online at your own pace. Designed for corporate flight attendants who need to maintain FAA currency without traveling.</p>
+        </div>
+        <div style="text-align:right; flex-shrink:0;">
+          <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(22px,2.2vw,32px); font-weight:300; margin-bottom:12px; white-space:nowrap;">$600&ndash;$750</p>
+          <a href="https://beyondandabove.net" target="_blank" rel="noopener" class="pill pill-sm pill-gold">Register &#8594;</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ROI callout -->
+    <div style="margin-top:40px; padding:28px 32px; border:1px solid var(--border); border-radius:8px; background:rgba(154,122,74,0.06); display:flex; align-items:flex-start; gap:20px;">
+      <div style="width:3px;height:100%;min-height:40px;background:var(--gold);border-radius:2px;flex-shrink:0;"></div>
+      <div>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(17px,1.6vw,22px); font-weight:300; line-height:1.45; margin-bottom:8px;">
+          At $600&ndash;$900 per day, most graduates recover the full cost of initial training in under a week of work.
+        </p>
+        <p style="font-size:11px; color:var(--muted); letter-spacing:0.04em;">Early bird discounts up to $300 &nbsp;&middot;&nbsp; $750 off for former Spirit Airlines flight attendants &nbsp;&middot;&nbsp; 50% deposit option available &nbsp;&middot;&nbsp; Financing available</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       GRADUATE TESTIMONIALS — EDITORIAL QUOTES
+  ═══════════════════════════════════════════════════════════ -->
+  <section id="testimonials" class="section-pad" style="padding-top:40px;">
+    <div class="divider" style="margin-bottom:56px;"></div>
+
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:64px; flex-wrap:wrap; gap:16px;">
+      <div>
+        <p class="label" style="margin-bottom:14px;">46 Verified Google Reviews &mdash; 4.9 Stars</p>
+        <h2 class="heading-lg">What our <em>graduates</em> say</h2>
+      </div>
+      <a href="https://beyondandabove.net" target="_blank" rel="noopener" class="pill pill-sm">Enroll today &#8594;</a>
+    </div>
+
+    <div class="quote-grid">
+
+      <!-- Quote 1: Beniley -->
+      <div>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:72px; line-height:0.8; color:var(--text-deco); margin-bottom:12px; user-select:none;">&ldquo;</p>
+        <blockquote style="font-family:'Cormorant Garamond',serif; font-size:clamp(18px,1.6vw,22px); font-style:italic; font-weight:300; line-height:1.55; color:var(--text-hi); margin-bottom:24px;">
+          After completing my training, I was hired within one month — which speaks volumes about the quality of the instruction and preparation I received. The training was thorough, detailed, and truly set the standard for excellence.
+        </blockquote>
+        <div style="border-top:1px solid var(--border); padding-top:18px;">
+          <p style="font-size:10px; font-weight:400; letter-spacing:0.14em; text-transform:uppercase; color:var(--text); margin-bottom:4px;">Beniley LLorens</p>
+          <p style="font-size:11px; color:var(--muted); letter-spacing:0.04em;">Corporate Flight Attendant Graduate</p>
+        </div>
+      </div>
+
+      <!-- Quote 2: Hanh Ly -->
+      <div>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:72px; line-height:0.8; color:var(--text-deco); margin-bottom:12px; user-select:none;">&ldquo;</p>
+        <blockquote style="font-family:'Cormorant Garamond',serif; font-size:clamp(18px,1.6vw,22px); font-style:italic; font-weight:300; line-height:1.55; color:var(--text-hi); margin-bottom:24px;">
+          The program was comprehensively structured and prepared me for the real-world demands of working as a corporate flight attendant. It exceeded my every expectation.
+        </blockquote>
+        <div style="border-top:1px solid var(--border); padding-top:18px;">
+          <p style="font-size:10px; font-weight:400; letter-spacing:0.14em; text-transform:uppercase; color:var(--text); margin-bottom:4px;">Hanh Ly</p>
+          <p style="font-size:11px; color:var(--muted); letter-spacing:0.04em;">Corporate Flight Attendant Graduate</p>
+        </div>
+      </div>
+
+      <!-- Quote 3: Lindsey -->
+      <div>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:72px; line-height:0.8; color:var(--text-deco); margin-bottom:12px; user-select:none;">&ldquo;</p>
+        <blockquote style="font-family:'Cormorant Garamond',serif; font-size:clamp(18px,1.6vw,22px); font-style:italic; font-weight:300; line-height:1.55; color:var(--text-hi); margin-bottom:24px;">
+          Don't hesitate. If this is a passion of yours, go for it. The teachers were so down to earth and the real-life scenarios give you the full picture of what the job actually demands.
+        </blockquote>
+        <div style="border-top:1px solid var(--border); padding-top:18px;">
+          <p style="font-size:10px; font-weight:400; letter-spacing:0.14em; text-transform:uppercase; color:var(--text); margin-bottom:4px;">Lindsey Peoples</p>
+          <p style="font-size:11px; color:var(--muted); letter-spacing:0.04em;">Corporate Flight Attendant Graduate</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       WHAT YOU WILL LEARN — CURRICULUM
+  ═══════════════════════════════════════════════════════════ -->
+  <section id="curriculum" class="section-pad" style="padding-top:40px;">
+    <div class="divider" style="margin-bottom:56px;"></div>
+
+    <p class="label" style="margin-bottom:14px;">What you will learn</p>
+    <h2 class="heading-lg" style="margin-bottom:64px;">The <em>curriculum</em></h2>
+
+    <div class="priority-grid">
+
+      <div class="priority-cell">
+        <p style="font-size:10px; font-weight:400; letter-spacing:0.13em; text-transform:uppercase; color:var(--muted); margin-bottom:14px;">01 &mdash; Emergency Safety</p>
+        <p style="font-size:13.5px; line-height:1.78; color:var(--text-dim2); max-width:44ch;">
+          Emergency procedures training aligned with FAA Parts 91, 125, and 135. Students train on fire suppression, emergency evacuations, ditching procedures, first aid, and defibrillator use — all aboard actual aircraft at Banyan Air Service's FBO at Fort Lauderdale Executive Airport.
+        </p>
+      </div>
+
+      <div class="priority-cell">
+        <p style="font-size:10px; font-weight:400; letter-spacing:0.13em; text-transform:uppercase; color:var(--muted); margin-bottom:14px;">02 &mdash; White Glove Service</p>
+        <p style="font-size:13.5px; line-height:1.78; color:var(--text-dim2); max-width:44ch;">
+          The service standards expected aboard private jets are unlike anything in commercial aviation. Students master high-end cabin protocols, anticipatory service, guest preferences, in-flight etiquette, and the nuanced demands of ultra-high-net-worth principals and their families.
+        </p>
+      </div>
+
+      <div class="priority-cell">
+        <p style="font-size:10px; font-weight:400; letter-spacing:0.13em; text-transform:uppercase; color:var(--muted); margin-bottom:14px;">03 &mdash; Culinary &amp; Galley</p>
+        <p style="font-size:13.5px; line-height:1.78; color:var(--text-dim2); max-width:44ch;">
+          Students learn aircraft galley management, catering logistics, special dietary needs, table setting, food safety at altitude, and the art of delivering a restaurant-quality experience in a private aircraft cabin.
+        </p>
+      </div>
+
+      <div class="priority-cell">
+        <p style="font-size:10px; font-weight:400; letter-spacing:0.13em; text-transform:uppercase; color:var(--muted); margin-bottom:14px;">04 &mdash; Career Placement</p>
+        <p style="font-size:13.5px; line-height:1.78; color:var(--text-dim2); max-width:44ch;">
+          The program does not end at graduation. Students receive professional resume writing tailored to the corporate aviation market, interview coaching, and ongoing support from the Beyond &amp; Above team. Instructors remain a resource long after class ends.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FULL-BLEED: A CAREER ABOVE THE ORDINARY
+  ═══════════════════════════════════════════════════════════ -->
+  <section id="career-section">
+    <div class="bg">
+      <img
+        src="images/fullbleed.jpg"
+        alt=""
+        loading="lazy"
+      >
+    </div>
+
+    <div class="content">
+      <p class="label" style="margin-bottom:22px;">Fort Lauderdale, FL</p>
+      <h2 class="heading-xl">
+        A career<br>
+        <em>above the ordinary</em>
+      </h2>
+      <div style="margin-top:40px; display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="https://beyondandabove.net" target="_blank" rel="noopener" class="pill pill-gold">Register for the next class &#8594;</a>
+        <a href="#curriculum" class="pill">Discover what you will learn &#8594;</a>
+      </div>
+    </div>
+
+    <div class="scroll-line"></div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       GALLERY MARQUEE
+  ═══════════════════════════════════════════════════════════ -->
+  <div style="position:relative; height:300px; overflow:hidden;">
+    <div style="position:absolute;left:0;top:0;bottom:0;width:100px;background:linear-gradient(to right,var(--bg),transparent);z-index:5;pointer-events:none;"></div>
+    <div style="position:absolute;right:0;top:0;bottom:0;width:100px;background:linear-gradient(to left,var(--bg),transparent);z-index:5;pointer-events:none;"></div>
+
+    <div class="gallery-track" style="height:100%; padding:0 5px;">
+      <div style="height:100%;width:230px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal1.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.92) saturate(0.75);" alt="" loading="lazy"></div>
+      <div style="height:100%;width:195px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal2.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.9) saturate(0.8);" alt="" loading="lazy"></div>
+      <div style="height:100%;width:265px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal3.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.88) saturate(0.7);" alt="" loading="lazy"></div>
+      <div style="height:100%;width:215px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal4.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.9) saturate(0.75);" alt="" loading="lazy"></div>
+      <div style="height:100%;width:250px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal5.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.92) saturate(0.8);" alt="" loading="lazy"></div>
+      <div style="height:100%;width:200px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal6.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.88) saturate(0.7);" alt="" loading="lazy"></div>
+      <div style="height:100%;width:235px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal2.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.9) saturate(0.75);" alt="" loading="lazy"></div>
+      <div style="height:100%;width:215px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal3.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.88) saturate(0.7);" alt="" loading="lazy"></div>
+      <div style="height:100%;width:255px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal1.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.92) saturate(0.75);" alt="" loading="lazy"></div>
+      <div style="height:100%;width:200px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal4.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.9) saturate(0.8);" alt="" loading="lazy"></div>
+      <div style="height:100%;width:240px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal5.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.9) saturate(0.75);" alt="" loading="lazy"></div>
+      <div style="height:100%;width:215px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal6.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.88) saturate(0.7);" alt="" loading="lazy"></div>
+      <!-- Duplicate set for seamless loop -->
+      <div style="height:100%;width:230px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal1.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.92) saturate(0.75);" alt="" loading="lazy"></div>
+      <div style="height:100%;width:195px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal2.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.9) saturate(0.8);" alt="" loading="lazy"></div>
+      <div style="height:100%;width:265px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal3.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.88) saturate(0.7);" alt="" loading="lazy"></div>
+      <div style="height:100%;width:215px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal4.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.9) saturate(0.75);" alt="" loading="lazy"></div>
+      <div style="height:100%;width:250px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal5.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.92) saturate(0.8);" alt="" loading="lazy"></div>
+      <div style="height:100%;width:200px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal6.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.88) saturate(0.7);" alt="" loading="lazy"></div>
+      <div style="height:100%;width:235px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal2.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.9) saturate(0.75);" alt="" loading="lazy"></div>
+      <div style="height:100%;width:215px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal3.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.88) saturate(0.7);" alt="" loading="lazy"></div>
+      <div style="height:100%;width:255px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal1.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.92) saturate(0.75);" alt="" loading="lazy"></div>
+      <div style="height:100%;width:200px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal4.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.9) saturate(0.8);" alt="" loading="lazy"></div>
+      <div style="height:100%;width:240px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal5.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.9) saturate(0.75);" alt="" loading="lazy"></div>
+      <div style="height:100%;width:215px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal6.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.88) saturate(0.7);" alt="" loading="lazy"></div>
+    </div>
+  </div>
+
+  <!-- Heading above ticker -->
+  <div style="padding:80px 8vw 48px; text-align:center;">
+    <h2 class="heading-lg" style="max-width:22ch; margin:0 auto; line-height:1.2;">
+      We work tirelessly to prepare you for a career <em>above</em> the ordinary
+    </h2>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       CURRICULUM TICKER
+  ═══════════════════════════════════════════════════════════ -->
+  <div style="overflow:hidden; border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:14px 0;">
+    <div class="ticker-track">
+      <span class="ticker-item">Emergency Procedures</span>
+      <span class="ticker-sep">&#8212;</span>
+      <span class="ticker-item">FAA Part 91</span>
+      <span class="ticker-sep">&#8212;</span>
+      <span class="ticker-item">Culinary Arts</span>
+      <span class="ticker-sep">&#8212;</span>
+      <span class="ticker-item">FAA Part 125</span>
+      <span class="ticker-sep">&#8212;</span>
+      <span class="ticker-item">In-Flight Service</span>
+      <span class="ticker-sep">&#8212;</span>
+      <span class="ticker-item">FAA Part 135</span>
+      <span class="ticker-sep">&#8212;</span>
+      <span class="ticker-item">Cabin Safety</span>
+      <span class="ticker-sep">&#8212;</span>
+      <span class="ticker-item">Galley Management</span>
+      <span class="ticker-sep">&#8212;</span>
+      <span class="ticker-item">Passenger Etiquette</span>
+      <span class="ticker-sep">&#8212;</span>
+      <span class="ticker-item">Jet Familiarization</span>
+      <span class="ticker-sep">&#8212;</span>
+      <span class="ticker-item">Resume Coaching</span>
+      <span class="ticker-sep">&#8212;</span>
+      <span class="ticker-item">Career Placement</span>
+      <span class="ticker-sep">&#8212;</span>
+      <span class="ticker-item">Emergency Procedures</span>
+      <span class="ticker-sep">&#8212;</span>
+      <span class="ticker-item">FAA Part 91</span>
+      <span class="ticker-sep">&#8212;</span>
+      <span class="ticker-item">Culinary Arts</span>
+      <span class="ticker-sep">&#8212;</span>
+      <span class="ticker-item">FAA Part 125</span>
+      <span class="ticker-sep">&#8212;</span>
+      <span class="ticker-item">In-Flight Service</span>
+      <span class="ticker-sep">&#8212;</span>
+      <span class="ticker-item">FAA Part 135</span>
+      <span class="ticker-sep">&#8212;</span>
+      <span class="ticker-item">Cabin Safety</span>
+      <span class="ticker-sep">&#8212;</span>
+      <span class="ticker-item">Galley Management</span>
+      <span class="ticker-sep">&#8212;</span>
+      <span class="ticker-item">Passenger Etiquette</span>
+      <span class="ticker-sep">&#8212;</span>
+      <span class="ticker-item">Jet Familiarization</span>
+      <span class="ticker-sep">&#8212;</span>
+      <span class="ticker-item">Resume Coaching</span>
+      <span class="ticker-sep">&#8212;</span>
+      <span class="ticker-item">Career Placement</span>
+      <span class="ticker-sep">&#8212;</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       CONTACT
+  ═══════════════════════════════════════════════════════════ -->
+  <section id="contact" style="padding:120px 8vw; text-align:center;">
+    <div style="max-width:660px; margin:0 auto;">
+      <p class="label" style="margin-bottom:20px;">Begin your training</p>
+      <h2 class="heading-xl" style="margin-bottom:28px;">
+        Start your<br><em>next chapter</em>
+      </h2>
+      <p style="font-size:14px; line-height:1.72; color:var(--text-dim3); max-width:46ch; margin:0 auto 36px;">
+        Ready to step into corporate aviation? Register directly online, or reach out to Mary Lou for guidance on programs, class dates, and payment options.
+      </p>
+
+      <!-- Book directly -->
+      <a href="https://beyondandabove.net" target="_blank" rel="noopener" class="pill pill-gold" style="font-size:11.5px; padding:10px 28px; display:inline-flex;">
+        View class schedule &amp; register &#8594;
+      </a>
+
+      <div class="divider" style="margin:48px 0;"></div>
+
+      <!-- Contact form -->
+      <p class="label" style="margin-bottom:10px;">Or send us a message</p>
+      <p style="font-size:13px; color:var(--muted); letter-spacing:0.04em; margin-bottom:40px;">Have questions about programs, class dates, or payment options? Mary Lou will get back to you within 24 hours.</p>
+
+      <form
+        id="contact-form"
+        action="https://formspree.io/f/xvzyqwby"
+        method="POST"
+        style="max-width:520px; margin:0 auto; text-align:left;"
+      >
+        <!-- Name + Email row -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-bottom:28px;">
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <label for="cf-name" style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted);">Name</label>
+            <input
+              id="cf-name" name="name" type="text" required
+              placeholder="Your name"
+              style="
+                background:transparent;
+                border:none;
+                border-bottom:1px solid var(--border-mid);
+                padding:10px 0;
+                font-family:'Outfit',sans-serif;
+                font-size:14px;
+                color:var(--text);
+                outline:none;
+                width:100%;
+                transition:border-color 0.22s ease;
+              "
+              onfocus="this.style.borderColor='var(--gold)'"
+              onblur="this.style.borderColor='var(--border-mid)'"
+            />
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <label for="cf-email" style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted);">Email</label>
+            <input
+              id="cf-email" name="email" type="email" required
+              placeholder="your@email.com"
+              style="
+                background:transparent;
+                border:none;
+                border-bottom:1px solid var(--border-mid);
+                padding:10px 0;
+                font-family:'Outfit',sans-serif;
+                font-size:14px;
+                color:var(--text);
+                outline:none;
+                width:100%;
+                transition:border-color 0.22s ease;
+              "
+              onfocus="this.style.borderColor='var(--gold)'"
+              onblur="this.style.borderColor='var(--border-mid)'"
+            />
+          </div>
+        </div>
+
+        <!-- Program select -->
+        <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:28px;">
+          <label for="cf-program" style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted);">Program of interest</label>
+          <select
+            id="cf-program" name="program"
+            style="
+              background:transparent;
+              border:none;
+              border-bottom:1px solid var(--border-mid);
+              padding:10px 0;
+              font-family:'Outfit',sans-serif;
+              font-size:14px;
+              color:var(--text);
+              outline:none;
+              width:100%;
+              cursor:pointer;
+              appearance:none;
+              -webkit-appearance:none;
+              transition:border-color 0.22s ease;
+            "
+            onfocus="this.style.borderColor='var(--gold)'"
+            onblur="this.style.borderColor='var(--border-mid)'"
+          >
+            <option value="" style="background:var(--option-bg);">Select a program</option>
+            <option value="Initial Training" style="background:var(--option-bg);">Corporate Flight Attendant Initial Training — $3,500–$3,800</option>
+            <option value="Transitional Training" style="background:var(--option-bg);">Commercial FA Transitional Training — $1,750–$1,900</option>
+            <option value="Recurrent In-Class" style="background:var(--option-bg);">Recurrent Corporate FA Emergency Training — $1,750–$1,900</option>
+            <option value="Pilot Emergency" style="background:var(--option-bg);">Emergency Training for Pilots — $800–$950</option>
+            <option value="Online Recurrent" style="background:var(--option-bg);">Online Recurrent Emergency Training — $600–$750</option>
+            <option value="Not sure" style="background:var(--option-bg);">Not sure yet — need guidance</option>
+          </select>
+        </div>
+
+        <!-- Message -->
+        <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:36px;">
+          <label for="cf-message" style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted);">Message <span style="opacity:0.45;">(optional)</span></label>
+          <textarea
+            id="cf-message" name="message" rows="3"
+            placeholder="Questions about class dates, payment plans, or experience requirements..."
+            style="
+              background:transparent;
+              border:none;
+              border-bottom:1px solid var(--border-mid);
+              padding:10px 0;
+              font-family:'Outfit',sans-serif;
+              font-size:14px;
+              color:var(--text);
+              outline:none;
+              width:100%;
+              resize:none;
+              line-height:1.6;
+              transition:border-color 0.22s ease;
+            "
+            onfocus="this.style.borderColor='var(--gold)'"
+            onblur="this.style.borderColor='var(--border-mid)'"
+          ></textarea>
+        </div>
+
+        <!-- Submit + success state -->
+        <div style="text-align:center;">
+          <button
+            type="submit"
+            id="cf-submit"
+            class="pill pill-gold"
+            style="font-size:11.5px; padding:10px 32px; border:none; cursor:pointer; font-family:'Outfit',sans-serif;"
+          >Send message &#8594;</button>
+          <p id="cf-success" style="display:none; font-size:13px; color:var(--gold); letter-spacing:0.06em; margin-top:18px;">
+            Message sent. Mary Lou will be in touch shortly.
+          </p>
+        </div>
+      </form>
+
+      <div class="divider" style="margin:52px 0 40px;"></div>
+
+      <div style="display:flex; flex-direction:column; align-items:center; gap:14px;">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.1a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.06 6.06l1.27-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <a href="tel:+19546095600" style="font-size:12px; color:var(--muted); text-decoration:none; letter-spacing:0.06em; transition:color 0.2s ease;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">
+            (954) 609-5600
+          </a>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span style="font-size:12px; color:var(--muted); letter-spacing:0.06em;">
+            2011 S Perimeter Rd, Suite D &amp; E, Fort Lauderdale, FL 33309
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════════════════════ -->
+  <footer>
+    <div style="display:flex; align-items:center; gap:18px; flex-wrap:wrap;">
+      <div style="display:flex; align-items:center; gap:14px;">
+        <a href="mailto:marylou@beyondandabove.net" aria-label="Email" style="color:var(--muted); display:flex; transition:color 0.2s ease;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">
+          <svg width="14" height="11" viewBox="0 0 24 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="1" width="20" height="16" rx="2"/><polyline points="2,3 12,11 22,3"/></svg>
+        </a>
+        <a href="tel:+19546095600" aria-label="Phone" style="color:var(--muted); display:flex; transition:color 0.2s ease;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.1a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.06 6.06l1.27-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </a>
+      </div>
+      <a href="mailto:marylou@beyondandabove.net" style="font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.2s ease;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">
+        MARYLOU@BEYONDANDABOVE.NET
+      </a>
+    </div>
+
+    <div style="display:flex; align-items:center; gap:10px; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted);">
+      <span>Fort Lauderdale, FL &mdash; Near FXE Airport</span>
+      <span style="opacity:0.3;">|</span>
+      <span>&#169; 2026 Beyond &amp; Above</span>
+    </div>
+  </footer>
+
+  <script>
+    // Theme toggle
+    (function() {
+      var html = document.documentElement;
+      var sunIcon = document.getElementById('theme-icon-sun');
+      var moonIcon = document.getElementById('theme-icon-moon');
+
+      function applyTheme(theme) {
+        html.dataset.theme = theme;
+        sunIcon.style.display  = theme === 'dark'  ? 'flex' : 'none';
+        moonIcon.style.display = theme === 'light' ? 'flex' : 'none';
+      }
+
+      // Sync icon with whatever the early-init script set
+      applyTheme(html.dataset.theme || 'dark');
+
+      document.getElementById('theme-toggle').addEventListener('click', function() {
+        var next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('b-a-theme', next);
+        applyTheme(next);
+      });
+
+      // Follow system if user hasn't set a manual preference
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        if (!localStorage.getItem('b-a-theme')) applyTheme(e.matches ? 'dark' : 'light');
+      });
+    })();
+
+    // Nav scroll state
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+
+    // Overlay menu
+    const overlay = document.getElementById('overlay-menu');
+    document.getElementById('menu-btn').addEventListener('click', () => overlay.classList.add('open'));
+    document.getElementById('menu-close').addEventListener('click', () => overlay.classList.remove('open'));
+    overlay.querySelectorAll('a').forEach(a => a.addEventListener('click', () => overlay.classList.remove('open')));
+
+    // Sticky bar — show after hero, dismiss to sessionStorage
+    const stickyBar = document.getElementById('sticky-bar');
+    const hero = document.getElementById('hero');
+
+    if (!sessionStorage.getItem('stickyDismissed')) {
+      const observer = new IntersectionObserver(
+        ([entry]) => { if (!entry.isIntersecting) stickyBar.classList.add('visible'); else stickyBar.classList.remove('visible'); },
+        { threshold: 0 }
+      );
+      observer.observe(hero);
+    }
+
+    document.getElementById('sticky-dismiss').addEventListener('click', () => {
+      stickyBar.classList.remove('visible');
+      sessionStorage.setItem('stickyDismissed', '1');
+    });
+
+    // Contact form — fetch submission + inline success state
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById('cf-submit');
+        const success = document.getElementById('cf-success');
+        btn.textContent = 'Sending…';
+        btn.disabled = true;
+        try {
+          const res = await fetch(contactForm.action, {
+            method: 'POST',
+            body: new FormData(contactForm),
+            headers: { Accept: 'application/json' }
+          });
+          if (res.ok) {
+            contactForm.reset();
+            btn.style.display = 'none';
+            success.style.display = 'block';
+          } else {
+            btn.textContent = 'Try again →';
+            btn.disabled = false;
+          }
+        } catch {
+          btn.textContent = 'Try again →';
+          btn.disabled = false;
+        }
+      });
+    }
+  </script>
+
+  <style>
+    @media (max-width: 600px) {
+      #contact-form > div:first-child {
+        grid-template-columns: 1fr !important;
+      }
+    }
+    input::placeholder, textarea::placeholder {
+      color: rgba(237,233,227,0.25);
+    }
+    select option {
+      background: #0e0d0c;
+      color: #ede9e3;
+    }
+  </style>
+</body>
+</html>
