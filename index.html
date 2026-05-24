@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Beyond &amp; Above — Corporate Aviation Training</title>
+  <title>Beyond &amp; Above — Corporate Flight Attendant Training | Fort Lauderdale</title>
+  <meta name="description" content="Beyond & Above trains corporate flight attendants at Fort Lauderdale Executive Airport. 6-day FAA-compliant program, 4.9 stars, 24 years experience. No prior aviation experience required.">
+  <meta property="og:title" content="Beyond & Above — Corporate Flight Attendant Training">
+  <meta property="og:description" content="Six days of hands-on training at Fort Lauderdale Executive Airport. FAA Parts 91, 125 & 135. Graduates hired within weeks. $600–$900/day earning potential.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://beyondandabove.net">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈</text></svg>">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -117,6 +123,8 @@
     html[data-theme="dark"] .nav-logo { filter: invert(1) hue-rotate(180deg); opacity: 0.88; }
 
     html { scroll-behavior: smooth; }
+    /* Offset for fixed nav so anchor links don't hide content behind it */
+    section[id] { scroll-margin-top: 88px; }
 
     body {
       background: var(--bg);
@@ -125,6 +133,7 @@
       font-weight: 300;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
+      padding-bottom: 72px; /* clearance for fixed sticky bar */
     }
 
     /* ── Typography ─────────────────────────────────────── */
@@ -141,7 +150,7 @@
     .hero-sub {
       font-family: 'Outfit', sans-serif;
       font-weight: 200;
-      font-size: clamp(9px, 1.05vw, 14px);
+      font-size: clamp(11px, 1.05vw, 14px);
       letter-spacing: 0.52em;
       text-transform: uppercase;
       margin-top: 10px;
@@ -244,8 +253,8 @@
     .nav-left  { display: flex; align-items: center; gap: 18px; }
     .nav-right { display: flex; align-items: center; gap: 20px; }
 
-    .nav-social { display: flex; align-items: center; gap: 14px; opacity: 0.5; }
-    .nav-social a { color: var(--text); display: flex; transition: opacity 0.2s ease; }
+    .nav-social { display: flex; align-items: center; gap: 14px; }
+    .nav-social a { color: var(--text); display: flex; opacity: 0.5; transition: opacity 0.2s ease; }
     .nav-social a:hover { opacity: 1; }
 
     #menu-btn {
@@ -500,24 +509,166 @@
     @media (prefers-reduced-motion: reduce) {
       .gallery-track, .ticker-track { animation: none; }
       #sticky-bar { transition: none; }
+      .faq-icon { transition: none; }
+      .faq-q { transition: none; }
+      .pill { transition: none; }
+      #nav { transition: none; }
+    }
+
+    /* ── Focus-visible (keyboard nav) ───────────────────── */
+    :focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+    .pill:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+      border-radius: 9999px;
+    }
+    .faq-item summary:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 4px;
+      border-radius: 2px;
     }
 
     /* ── Mobile ──────────────────────────────────────────── */
     @media (max-width: 768px) {
+      /* Nav — collapse to logo + menu only */
+      #nav { padding: 14px 20px; }
+      .nav-left > a.pill { display: none; }
+      .nav-social > a { display: none; }
+
+      /* Hero */
       .hero-bottom { grid-template-columns: 1fr; gap: 24px; padding: 0 20px 28px; }
       .hero-bottom-divider { border-left: none; border-top: 1px solid var(--border); padding-left: 0; padding-top: 20px; }
-      .section-pad { padding: 70px 5vw; }
+
+      /* Sections */
+      .section-pad { padding: 60px 5vw; }
+
+      /* Program */
+      .program-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
+      .program-image-wrap { aspect-ratio: 4/3 !important; }
+
+      /* Courses — stack price/CTA left-aligned */
+      .course-row { grid-template-columns: 1fr; gap: 14px; }
+      .course-row > div:last-child { text-align: left !important; }
+
+      /* Quotes — dividers between stacked items */
+      .quote-grid { grid-template-columns: 1fr !important; gap: 0 !important; }
+      .quote-grid > div { padding-bottom: 44px; }
+      .quote-grid > div + div { padding-top: 44px; border-top: 1px solid var(--border); }
+
+      /* Curriculum */
       .priority-grid { grid-template-columns: 1fr; }
       .priority-cell:nth-child(odd)  { padding-right: 0; border-right: none; }
       .priority-cell:nth-child(even) { padding-left: 0; }
       .priority-cell { border-bottom: 1px solid var(--border); }
       .priority-cell:last-child { border-bottom: none; }
+
+      /* Career */
       #career-section .content { padding: 0 5vw 60px; }
-      .program-grid { grid-template-columns: 1fr !important; }
-      .quote-grid { grid-template-columns: 1fr !important; }
-      .course-row { grid-template-columns: 1fr; }
+
+      /* Gallery edge fades — narrower on mobile */
+      .gallery-fade-l, .gallery-fade-r { width: 56px !important; }
+
+      /* Tirelessly heading */
+      .tirelessly-heading { padding: 56px 5vw 36px !important; }
+
+      /* Contact */
+      #contact { padding: 80px 5vw !important; }
+      #contact-form > div:first-child { grid-template-columns: 1fr !important; gap: 20px !important; }
+
+      /* Sticky bar */
       #sticky-bar { padding: 12px 20px; }
       #sticky-bar .sticky-label { display: none; }
+
+      /* Hide scroll indicator on mobile */
+      .scroll-line { display: none; }
+
+      /* Mary Lou mobile */
+      .marylou-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+      .marylou-stats { grid-template-columns: 1fr 1fr 1fr !important; gap: 16px !important; }
+
+      /* FAQ mobile */
+      .faq-q { font-size: 17px !important; }
+    }
+  </style>
+
+  <style>
+    /* ── Mary Lou bio ─────────────────────────────────────── */
+    .marylou-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .marylou-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      margin-top: 36px;
+    }
+    .marylou-stat {
+      padding: 20px 0;
+      border-top: 1px solid var(--border);
+    }
+    .marylou-cred {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border: 1px solid var(--border-mid);
+      border-radius: 9999px;
+      font-size: 9.5px;
+      font-weight: 400;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--text-dim2);
+      margin: 0 6px 8px 0;
+    }
+
+    /* ── FAQ accordion ────────────────────────────────────── */
+    .faq-item {
+      border-top: 1px solid var(--border);
+    }
+    .faq-item:last-of-type {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-item summary {
+      padding: 22px 0;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      user-select: none;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-q {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(17px, 1.5vw, 22px);
+      font-weight: 300;
+      line-height: 1.3;
+      color: var(--text);
+      transition: color 0.2s ease;
+    }
+    .faq-item[open] .faq-q { color: var(--gold); }
+    .faq-icon {
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      color: var(--gold);
+      transition: transform 0.22s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .faq-item[open] .faq-icon { transform: rotate(45deg); }
+    .faq-answer {
+      padding-bottom: 28px;
+      font-size: 13px;
+      line-height: 1.75;
+      color: var(--text-dim2);
+      max-width: 70ch;
     }
   </style>
 </head>
@@ -631,7 +782,7 @@
     <div class="hero-center">
       <h1 class="hero-wordmark" style="text-align:center; color:var(--text);">BEYOND &amp; ABOVE</h1>
       <p class="hero-sub" style="text-align:center; color:rgba(237,233,227,0.55);">Corporate Aviation Training</p>
-      <p style="font-family:'Outfit',sans-serif; font-weight:300; font-size:clamp(12px,1.2vw,15px); color:rgba(237,233,227,0.52); margin-top:22px; letter-spacing:0.03em; max-width:46ch; text-align:center; line-height:1.65;">
+      <p style="font-family:'Outfit',sans-serif; font-weight:300; font-size:clamp(13px,1.2vw,15px); color:rgba(237,233,227,0.52); margin-top:22px; letter-spacing:0.03em; max-width:46ch; text-align:center; line-height:1.65;">
         No aviation experience required. Six days of hands-on training at Fort Lauderdale Executive Airport.
       </p>
       <a href="https://beyondandabove.net" target="_blank" rel="noopener" class="pill pill-gold" style="margin-top:30px; font-size:10px; padding:8px 20px;">
@@ -707,7 +858,7 @@
       </div>
 
       <div style="display:flex; flex-direction:column; gap:20px;">
-        <div style="border-radius:8px; overflow:hidden; aspect-ratio:5/6;">
+        <div class="program-image-wrap" style="border-radius:8px; overflow:hidden; aspect-ratio:5/6;">
           <img
             src="images/program.jpg"
             alt="Beyond & Above training program"
@@ -757,12 +908,58 @@
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════
+       MARY LOU — FOUNDER BIO
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="section-pad" style="padding-top:40px;">
+    <div class="divider" style="margin-bottom:56px;"></div>
+
+    <div class="marylou-grid">
+
+      <!-- Left: bio -->
+      <div>
+        <p class="label" style="margin-bottom:18px;">Founded &amp; Led By</p>
+        <h2 class="heading-lg" style="margin-bottom:20px;">Mary Lou <em>Gallagher</em></h2>
+        <p style="font-size:11px; font-weight:400; letter-spacing:0.10em; text-transform:uppercase; color:var(--muted); margin-bottom:24px;">Founder &amp; Owner &nbsp;&middot;&nbsp; 24 Years in Corporate Aviation</p>
+        <p style="font-size:13.5px; line-height:1.75; color:var(--text-dim2); max-width:54ch; margin-bottom:28px;">Mary Lou built Beyond &amp; Above from the ground up. Over 24 years, the school has trained more than 5,000 pilots and flight attendants and placed them into corporate aviation careers worldwide. She has served on the FAA Aviation Rulemaking Committee in Washington D.C., the NBAA Flight Attendant Committee, and is a member of the IS-BAO — the global body that sets aviation safety standards.</p>
+        <div>
+          <span class="marylou-cred">FAA Rulemaking Committee</span>
+          <span class="marylou-cred">NBAA Flight Attendant Committee</span>
+          <span class="marylou-cred">IS-BAO Member</span>
+        </div>
+      </div>
+
+      <!-- Right: stats -->
+      <div>
+        <div class="marylou-stats">
+          <div class="marylou-stat">
+            <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(42px,5vw,72px); font-weight:300; line-height:1; color:var(--text); margin-bottom:8px;">24</p>
+            <p class="label">Years experience</p>
+          </div>
+          <div class="marylou-stat">
+            <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(42px,5vw,72px); font-weight:300; line-height:1; color:var(--text); margin-bottom:8px;">5k<span style="font-size:0.5em; vertical-align:super; color:var(--gold);">+</span></p>
+            <p class="label">Graduates</p>
+          </div>
+          <div class="marylou-stat">
+            <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(42px,5vw,72px); font-weight:300; line-height:1; color:var(--text); margin-bottom:8px;">4.9</p>
+            <p class="label">Google rating</p>
+          </div>
+        </div>
+        <div style="margin-top:32px; padding:20px 24px; border:1px solid rgba(154,122,74,0.30); border-radius:6px; background:rgba(154,122,74,0.05);">
+          <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(16px,1.5vw,20px); font-weight:300; font-style:italic; line-height:1.55; color:var(--text-hi);">"Our trained Corporate Flight Attendants are preferred by flight departments for their professionalism and the high standards of our training."</p>
+          <p style="font-size:10px; font-weight:400; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); margin-top:14px;">Mary Lou Gallagher</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
        COURSES & PRICING
   ═══════════════════════════════════════════════════════════ -->
   <section id="courses" class="section-pad" style="padding-top:40px;">
     <div class="divider" style="margin-bottom:56px;"></div>
 
-    <div style="display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:52px; flex-wrap:wrap; gap:16px;">
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:36px; flex-wrap:wrap; gap:16px;">
       <div>
         <p class="label" style="margin-bottom:14px;">Training Programs</p>
         <h2 class="heading-lg">Choose the program <em>that fits</em> where you are now</h2>
@@ -770,14 +967,24 @@
       <a href="https://beyondandabove.net" target="_blank" rel="noopener" class="pill pill-sm pill-gold">View class schedule &#8594;</a>
     </div>
 
+    <!-- Helper callout for newcomers -->
+    <div style="margin-bottom:44px; padding:18px 24px; border:1px solid var(--border-mid); border-radius:6px; background:var(--surface); display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;">
+      <span style="font-size:9.5px; font-weight:400; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); white-space:nowrap;">New to aviation?</span>
+      <p style="font-size:12.5px; line-height:1.6; color:var(--text-dim2);">If you have no prior flight attendant experience, the <strong style="color:var(--text); font-weight:400;">Initial Training</strong> below is where you start. The other programs are for flight attendants who are already certified and working.</p>
+    </div>
+
     <!-- Course rows -->
     <div>
 
       <div class="course-row">
         <div>
-          <p class="label" style="margin-bottom:10px;">Initial Training &mdash; 6 Days</p>
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px; flex-wrap:wrap;">
+            <p class="label">Initial Training &mdash; 6 Days</p>
+            <span style="font-size:9px; font-weight:400; letter-spacing:0.12em; text-transform:uppercase; color:#f4f1ec; background:var(--gold); padding:3px 10px; border-radius:9999px;">Start here</span>
+          </div>
           <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(20px,2vw,28px); font-weight:300; line-height:1.2; margin-bottom:10px;">Corporate Flight Attendant Initial Training</p>
-          <p style="font-size:12.5px; line-height:1.65; color:var(--text-dim4); max-width:52ch;">Full FAA-compliant certification covering emergency procedures, white glove service, culinary arts, cabin etiquette, and career placement. No experience required.</p>
+          <p style="font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--gold); margin-bottom:8px;">For: Complete beginners &mdash; no aviation or flight attendant experience needed</p>
+          <p style="font-size:12.5px; line-height:1.65; color:var(--text-dim4); max-width:52ch;">Six days of hands-on training covering emergency safety, white glove service, culinary arts, cabin etiquette, and career placement. You leave with your certification and the skills to start working immediately.</p>
         </div>
         <div style="text-align:right; flex-shrink:0;">
           <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(22px,2.2vw,32px); font-weight:300; margin-bottom:12px; white-space:nowrap;">$3,500&ndash;$3,800</p>
@@ -789,7 +996,8 @@
         <div>
           <p class="label" style="margin-bottom:10px;">Transitional Training &mdash; 3 Days</p>
           <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(20px,2vw,28px); font-weight:300; line-height:1.2; margin-bottom:10px;">Corporate Training for Commercial Flight Attendants</p>
-          <p style="font-size:12.5px; line-height:1.65; color:var(--text-dim4); max-width:52ch;">For current FAA Part 121 licensed commercial flight attendants transitioning to corporate and private aviation operations.</p>
+          <p style="font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--gold); margin-bottom:8px;">For: Flight attendants currently working for a commercial airline (Delta, United, American, Southwest, etc.)</p>
+          <p style="font-size:12.5px; line-height:1.65; color:var(--text-dim4); max-width:52ch;">Already licensed and working in commercial aviation? This condensed 3-day program covers what changes when you move into private and corporate aviation, so you can transition without starting from scratch.</p>
         </div>
         <div style="text-align:right; flex-shrink:0;">
           <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(22px,2.2vw,32px); font-weight:300; margin-bottom:12px; white-space:nowrap;">$1,750&ndash;$1,900</p>
@@ -801,7 +1009,8 @@
         <div>
           <p class="label" style="margin-bottom:10px;">Recurrent Training &mdash; 3 Days (In-Class)</p>
           <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(20px,2vw,28px); font-weight:300; line-height:1.2; margin-bottom:10px;">Recurrent Corporate Flight Attendant Emergency Training</p>
-          <p style="font-size:12.5px; line-height:1.65; color:var(--text-dim4); max-width:52ch;">For working corporate flight attendants maintaining FAA Parts 91, 125, and 135 currency. In-person at Fort Lauderdale Executive Airport.</p>
+          <p style="font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--gold); margin-bottom:8px;">For: Corporate flight attendants renewing their annual certification</p>
+          <p style="font-size:12.5px; line-height:1.65; color:var(--text-dim4); max-width:52ch;">Required every 12 months to keep your certifications current. Held in-person at Fort Lauderdale Executive Airport with hands-on emergency drills.</p>
         </div>
         <div style="text-align:right; flex-shrink:0;">
           <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(22px,2.2vw,32px); font-weight:300; margin-bottom:12px; white-space:nowrap;">$1,750&ndash;$1,900</p>
@@ -813,7 +1022,8 @@
         <div>
           <p class="label" style="margin-bottom:10px;">Pilot Emergency Training &mdash; 1 Day</p>
           <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(20px,2vw,28px); font-weight:300; line-height:1.2; margin-bottom:10px;">Emergency Training for Pilots</p>
-          <p style="font-size:12.5px; line-height:1.65; color:var(--text-dim4); max-width:52ch;">One-day emergency certification for pilots operating under FAA Parts 91, 125, and 135. Covers cabin emergency procedures, evacuation, and first aid protocols.</p>
+          <p style="font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--gold); margin-bottom:8px;">For: Licensed pilots who need cabin emergency certification</p>
+          <p style="font-size:12.5px; line-height:1.65; color:var(--text-dim4); max-width:52ch;">A single day covering cabin emergency procedures, passenger evacuation, and first aid protocols. Satisfies FAA certification requirements for pilots operating private and charter flights.</p>
         </div>
         <div style="text-align:right; flex-shrink:0;">
           <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(22px,2.2vw,32px); font-weight:300; margin-bottom:12px; white-space:nowrap;">$800&ndash;$950</p>
@@ -825,7 +1035,8 @@
         <div>
           <p class="label" style="margin-bottom:10px;">Online &mdash; Self-Paced</p>
           <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(20px,2vw,28px); font-weight:300; line-height:1.2; margin-bottom:10px;">Online Recurrent Emergency Training</p>
-          <p style="font-size:12.5px; line-height:1.65; color:var(--text-dim4); max-width:52ch;">Complete your recurrent emergency training entirely online at your own pace. Designed for corporate flight attendants who need to maintain FAA currency without traveling.</p>
+          <p style="font-size:11px; font-weight:400; letter-spacing:0.06em; color:var(--gold); margin-bottom:8px;">For: Corporate flight attendants renewing certifications without traveling to Fort Lauderdale</p>
+          <p style="font-size:12.5px; line-height:1.65; color:var(--text-dim4); max-width:52ch;">The same annual recurrent certification, completed entirely online at your own pace, from anywhere. No travel required.</p>
         </div>
         <div style="text-align:right; flex-shrink:0;">
           <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(22px,2.2vw,32px); font-weight:300; margin-bottom:12px; white-space:nowrap;">$600&ndash;$750</p>
@@ -836,8 +1047,11 @@
     </div>
 
     <!-- ROI callout -->
-    <div style="margin-top:40px; padding:28px 32px; border:1px solid var(--border); border-radius:8px; background:rgba(154,122,74,0.06); display:flex; align-items:flex-start; gap:20px;">
-      <div style="width:3px;height:100%;min-height:40px;background:var(--gold);border-radius:2px;flex-shrink:0;"></div>
+    <div style="margin-top:40px; padding:28px 32px; border:1px solid rgba(154,122,74,0.35); border-radius:8px; background:rgba(154,122,74,0.06);">
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="var(--gold)"><polygon points="6,0 12,6 6,12 0,6"/></svg>
+        <span style="font-size:9px; font-weight:400; letter-spacing:0.16em; text-transform:uppercase; color:var(--gold);">Return on Investment</span>
+      </div>
       <div>
         <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(17px,1.6vw,22px); font-weight:300; line-height:1.45; margin-bottom:8px;">
           At $600&ndash;$900 per day, most graduates recover the full cost of initial training in under a week of work.
@@ -976,32 +1190,39 @@
        GALLERY MARQUEE
   ═══════════════════════════════════════════════════════════ -->
   <div style="position:relative; height:300px; overflow:hidden;">
-    <div style="position:absolute;left:0;top:0;bottom:0;width:100px;background:linear-gradient(to right,var(--bg),transparent);z-index:5;pointer-events:none;"></div>
-    <div style="position:absolute;right:0;top:0;bottom:0;width:100px;background:linear-gradient(to left,var(--bg),transparent);z-index:5;pointer-events:none;"></div>
+    <div class="gallery-fade-l" style="position:absolute;left:0;top:0;bottom:0;width:100px;background:linear-gradient(to right,var(--bg),transparent);z-index:5;pointer-events:none;"></div>
+    <div class="gallery-fade-r" style="position:absolute;right:0;top:0;bottom:0;width:100px;background:linear-gradient(to left,var(--bg),transparent);z-index:5;pointer-events:none;"></div>
 
     <div class="gallery-track" style="height:100%; padding:0 5px;">
+      <!-- Set 1 of 2 — identical halves for seamless loop -->
       <div style="height:100%;width:230px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal1.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.92) saturate(0.75);" alt="" loading="lazy"></div>
+      <div style="height:100%;width:200px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal7.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.88) saturate(0.72);" alt="" loading="lazy"></div>
       <div style="height:100%;width:195px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal2.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.9) saturate(0.8);" alt="" loading="lazy"></div>
       <div style="height:100%;width:265px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal3.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.88) saturate(0.7);" alt="" loading="lazy"></div>
+      <div style="height:100%;width:200px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal8.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.88) saturate(0.72);" alt="" loading="lazy"></div>
       <div style="height:100%;width:215px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal4.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.9) saturate(0.75);" alt="" loading="lazy"></div>
       <div style="height:100%;width:250px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal5.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.92) saturate(0.8);" alt="" loading="lazy"></div>
+      <div style="height:100%;width:195px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal9.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.88) saturate(0.7);" alt="" loading="lazy"></div>
       <div style="height:100%;width:200px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal6.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.88) saturate(0.7);" alt="" loading="lazy"></div>
       <div style="height:100%;width:235px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal2.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.9) saturate(0.75);" alt="" loading="lazy"></div>
-      <div style="height:100%;width:215px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal3.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.88) saturate(0.7);" alt="" loading="lazy"></div>
       <div style="height:100%;width:255px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal1.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.92) saturate(0.75);" alt="" loading="lazy"></div>
+      <div style="height:100%;width:215px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal3.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.88) saturate(0.7);" alt="" loading="lazy"></div>
       <div style="height:100%;width:200px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal4.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.9) saturate(0.8);" alt="" loading="lazy"></div>
       <div style="height:100%;width:240px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal5.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.9) saturate(0.75);" alt="" loading="lazy"></div>
       <div style="height:100%;width:215px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal6.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.88) saturate(0.7);" alt="" loading="lazy"></div>
-      <!-- Duplicate set for seamless loop -->
+      <!-- Set 2 of 2 — exact duplicate for seamless loop -->
       <div style="height:100%;width:230px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal1.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.92) saturate(0.75);" alt="" loading="lazy"></div>
+      <div style="height:100%;width:200px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal7.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.88) saturate(0.72);" alt="" loading="lazy"></div>
       <div style="height:100%;width:195px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal2.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.9) saturate(0.8);" alt="" loading="lazy"></div>
       <div style="height:100%;width:265px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal3.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.88) saturate(0.7);" alt="" loading="lazy"></div>
+      <div style="height:100%;width:200px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal8.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.88) saturate(0.72);" alt="" loading="lazy"></div>
       <div style="height:100%;width:215px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal4.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.9) saturate(0.75);" alt="" loading="lazy"></div>
       <div style="height:100%;width:250px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal5.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.92) saturate(0.8);" alt="" loading="lazy"></div>
+      <div style="height:100%;width:195px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal9.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.88) saturate(0.7);" alt="" loading="lazy"></div>
       <div style="height:100%;width:200px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal6.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.88) saturate(0.7);" alt="" loading="lazy"></div>
       <div style="height:100%;width:235px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal2.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.9) saturate(0.75);" alt="" loading="lazy"></div>
-      <div style="height:100%;width:215px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal3.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.88) saturate(0.7);" alt="" loading="lazy"></div>
       <div style="height:100%;width:255px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal1.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.92) saturate(0.75);" alt="" loading="lazy"></div>
+      <div style="height:100%;width:215px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal3.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.88) saturate(0.7);" alt="" loading="lazy"></div>
       <div style="height:100%;width:200px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal4.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.9) saturate(0.8);" alt="" loading="lazy"></div>
       <div style="height:100%;width:240px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal5.jpg" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.9) saturate(0.75);" alt="" loading="lazy"></div>
       <div style="height:100%;width:215px;flex-shrink:0;overflow:hidden;border-radius:5px;"><img src="images/gal6.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.88) saturate(0.7);" alt="" loading="lazy"></div>
@@ -1009,7 +1230,7 @@
   </div>
 
   <!-- Heading above ticker -->
-  <div style="padding:80px 8vw 48px; text-align:center;">
+  <div class="tirelessly-heading" style="padding:80px 8vw 48px; text-align:center;">
     <h2 class="heading-lg" style="max-width:22ch; margin:0 auto; line-height:1.2;">
       We work tirelessly to prepare you for a career <em>above</em> the ordinary
     </h2>
@@ -1070,6 +1291,96 @@
       <span class="ticker-sep">&#8212;</span>
     </div>
   </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FAQ
+  ═══════════════════════════════════════════════════════════ -->
+  <section id="faq" class="section-pad" style="padding-top:40px;">
+    <div class="divider" style="margin-bottom:56px;"></div>
+
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:52px; flex-wrap:wrap; gap:16px;">
+      <div>
+        <p class="label" style="margin-bottom:14px;">Common Questions</p>
+        <h2 class="heading-lg">What people <em>ask</em> before enrolling</h2>
+      </div>
+    </div>
+
+    <div style="max-width:820px;">
+
+      <details class="faq-item">
+        <summary>
+          <span class="faq-q">What classes do you offer?</span>
+          <svg class="faq-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="8" y1="2" x2="8" y2="14"/><line x1="2" y1="8" x2="14" y2="8"/></svg>
+        </summary>
+        <p class="faq-answer">Initial training (6 days) for complete beginners, transitional training (3 days) for licensed commercial flight attendants moving into corporate aviation, recurrent emergency training (in-class and online) for working corporate FAs, and a one-day emergency certification for pilots.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span class="faq-q">When and where are classes held?</span>
+          <svg class="faq-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="8" y1="2" x2="8" y2="14"/><line x1="2" y1="8" x2="14" y2="8"/></svg>
+        </summary>
+        <p class="faq-answer">Classes run once or twice a month at Fort Lauderdale Executive Airport — 2011 Perimeter Road, Suite C &amp; D. View the current schedule to see upcoming dates.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span class="faq-q">Are there any requirements to enroll?</span>
+          <svg class="faq-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="8" y1="2" x2="8" y2="14"/><line x1="2" y1="8" x2="14" y2="8"/></svg>
+        </summary>
+        <p class="faq-answer">No specific employment or educational requirements. The job does demand someone who is highly flexible, holds themselves to a high standard, and is comfortable with unpredictable travel. We recommend doing your research upfront to confirm this career is the right fit before investing.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span class="faq-q">Will I be able to find a job after graduating?</span>
+          <svg class="faq-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="8" y1="2" x2="8" y2="14"/><line x1="2" y1="8" x2="14" y2="8"/></svg>
+        </summary>
+        <p class="faq-answer">Graduates receive job leads from our continuously updated placement database, interview coaching, resume writing, and access to our VIP membership network. Flight departments actively seek out Beyond &amp; Above graduates. Most students hired within weeks. Results depend on your effort and availability.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span class="faq-q">How much can a corporate flight attendant earn?</span>
+          <svg class="faq-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="8" y1="2" x2="8" y2="14"/><line x1="2" y1="8" x2="14" y2="8"/></svg>
+        </summary>
+        <p class="faq-answer">Day rates run $600&ndash;$900, with annual earnings typically between $90K&ndash;$175K depending on how much you fly and who you work for. You also receive per diem pay and accommodation at top hotels. Most graduates recover the cost of Initial Training within their first week of work.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span class="faq-q">Is the certification accepted internationally?</span>
+          <svg class="faq-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="8" y1="2" x2="8" y2="14"/><line x1="2" y1="8" x2="14" y2="8"/></svg>
+        </summary>
+        <p class="faq-answer">Yes. Our training complies with FAA Parts 91, 125, and 135 — the same standards used in corporate aviation worldwide. Flight departments globally recognize and prefer our graduates.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span class="faq-q">What's the difference between corporate and commercial flight attendants?</span>
+          <svg class="faq-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="8" y1="2" x2="8" y2="14"/><line x1="2" y1="8" x2="14" y2="8"/></svg>
+        </summary>
+        <p class="faq-answer">Commercial airlines put you through 4&ndash;6 weeks of training, pay for it, then start you as a reserve earning $18K&ndash;$25K. Only about 4% of applicants make it. Corporate is different: you fund your own 6-day training (~$3,500), but you work privately for high-net-worth clients, earn $600&ndash;$900 a day, stay in 5-star hotels, and have far more flexibility over your schedule.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span class="faq-q">I'm already a licensed commercial flight attendant. Do I need to start from the beginning?</span>
+          <svg class="faq-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="8" y1="2" x2="8" y2="14"/><line x1="2" y1="8" x2="14" y2="8"/></svg>
+        </summary>
+        <p class="faq-answer">No. If you hold an active FAA Part 121 license, you qualify for our 3-day Transitional Training program, which covers the differences between commercial and corporate operations without repeating what you already know.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span class="faq-q">I'm not yet authorized to work in the U.S. Can I still take the course?</span>
+          <svg class="faq-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="8" y1="2" x2="8" y2="14"/><line x1="2" y1="8" x2="14" y2="8"/></svg>
+        </summary>
+        <p class="faq-answer">Yes. The training itself has no work authorization requirement. Many international students attend to prepare for their careers in advance.</p>
+      </details>
+
+    </div>
+  </section>
 
   <!-- ═══════════════════════════════════════════════════════════
        CONTACT
@@ -1350,17 +1661,13 @@
   </script>
 
   <style>
-    @media (max-width: 600px) {
-      #contact-form > div:first-child {
-        grid-template-columns: 1fr !important;
-      }
-    }
     input::placeholder, textarea::placeholder {
-      color: rgba(237,233,227,0.25);
+      color: var(--muted);
+      opacity: 0.55;
     }
     select option {
-      background: #0e0d0c;
-      color: #ede9e3;
+      background: var(--option-bg);
+      color: var(--text);
     }
   </style>
 </body>
